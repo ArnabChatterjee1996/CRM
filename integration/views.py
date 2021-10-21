@@ -18,7 +18,7 @@ def server_health(request):
 @api_view(['GET'])
 def search_person(request):
     try:
-        logging.info("Entering method : search_person")
+        logging.info("Entering method : search_person with request : {}".format(request.data))
         authorization = request.META.get('HTTP_AUTHORIZATION')
         id = request.GET.get('id')
         name = request.GET.get('name')
@@ -71,7 +71,7 @@ def search_person(request):
 @api_view(['PUT'])
 def update_person(request):
     try:
-        logging.info("Entering method : update_person")
+        logging.info("Entering method : update_person with request : {}".format(request.data))
         id = request.GET.get('id')
         if id is None:
             return Response({"status": "Failure",
@@ -122,7 +122,7 @@ def update_person(request):
 @api_view(['POST'])
 def add_note_for_person(request):
     try:
-        logging.info("Entering method : add_note_for_person")
+        logging.info("Entering method : add_note_for_person with request : {}".format(request.data))
         data = AddNoteForPersonSerializer(data=request.data)
         if data.is_valid():
             authorization = request.META.get('HTTP_AUTHORIZATION')
