@@ -36,6 +36,9 @@ def search_person(request):
                          "data":person_search_details.json()},
                         status=person_search_details.status_code)
         elif person_search_details.status_code==status.HTTP_200_OK:
+            ## while searching with name even though there are no results, pipedrive API will show success
+            ## However we feel that it's a failure and therefore checking if the data is null or not
+            ## Only if the status code is 200 and data is not null , we'll mention it as a success response
             if person_search_details.json().get('data') is not None:
                 return Response({"status": "Success",
                              "message": "Person found successfully",
